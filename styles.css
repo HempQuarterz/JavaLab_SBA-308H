@@ -81,3 +81,13 @@
     background-color: lightcoral;
   }
   
+
+  .health-bar {
+    width: 100%;
+    height: 10px;
+    background-color: green;
+  }
+  
+  .ship.alien-ship .health-bar {
+    background-color: red;
+  }
