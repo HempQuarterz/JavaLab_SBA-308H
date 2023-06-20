@@ -1,8 +1,10 @@
-/*body {
+body {
     margin: 0;
     padding: 0;
     background: url(https://i.gifer.com/81mz.gif) center center fixed;
     background-size: cover;
+    color: white;
+    font-size: 20px;  
   }
   
   #container {
@@ -10,7 +12,7 @@
     z-index: 1;
     background: rgba(255, 255, 255, 0.8); 
   } 
-  */ 
+   
 
 
 
@@ -24,7 +26,7 @@
   #battlefield {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
   
   .ship {
@@ -61,8 +63,9 @@
   .btn {
     padding: 10px;
     font-size: 16px;
+    
   }
-  
+
   /* Additional styling for visual effects */
   .ship {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -90,4 +93,9 @@
   
   .ship.alien-ship .health-bar {
     background-color: red;
+  }
+
+  .alien-ships {
+    display: inline-block;
+    margin-right: 10px;
   }

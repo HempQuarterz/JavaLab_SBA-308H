@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
     alienShips: [],
 
     start() {
-      outputText("Let the Battle Begin");
+      outputText("Let the Battle Begin!");
 
       this.playerShip = new HumanShip();
 
@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
         this.alienShips.push(alienShip);
       }
 
+      updateShipStatus();
       this.updateText();
     },
 
@@ -77,12 +78,12 @@ document.addEventListener("DOMContentLoaded", function() {
         outputText(`You destroyed ${currentAlienShip.name}!`);
         // Remove the destroyed alien ship from the array
         this.alienShips.splice(0, 1);
-      } else {
+      } 
         // Alien ships attack if any are remaining
         if (this.alienShips.length > 0) {
           this.alienShipsAttack();
         }
-      }
+      
   
       // Update ship status
       updateShipStatus();
@@ -99,20 +100,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     alienShipsAttack() {
       outputText("Enemy ships are attacking!");
-
-      for (const alienShip of this.alienShips) {
-        if (alienShip.hull > 0) {
-          alienShip.attack(this.playerShip);
-
-          // Check if the player ship is destroyed
-          if (this.playerShip.hull <= 0) {
-            outputText(`Game over! ${this.playerShip.name} was destroyed.`);
-            disableButtons();
-            return; // End the game
-          }
+    
+      const aliveAlienShips = this.alienShips.filter(ship => ship.hull > 0);
+      
+      if (aliveAlienShips.length > 0) {
+        const attackingAlienShip = aliveAlienShips[0];
+        attackingAlienShip.attack(this.playerShip);
+    
+        // Check if the player ship is destroyed
+        if (this.playerShip.hull <= 0) {
+          outputText(`Game over! ${this.playerShip.name} was destroyed.`);
+          disableButtons();
+          return; // End the game
         }
       }
     },
+    
+    
   
     retreat() {
       disableButtons();
@@ -153,11 +157,22 @@ document.addEventListener("DOMContentLoaded", function() {
   function updateShipStatus() {
     const shipStatusElement = document.getElementById("shipStatus");
     shipStatusElement.innerHTML = `
+    <div>
       <p><strong>${game.playerShip.name}</strong></p>
-      <p>Hull: ${game.playerShip.hull}</p>
+      <img src="./Images/e2002de1-e791-4215-b354-cf1a9d92e9f2.jpg" alt="Player Ship" style="width: 100px; height: 100px;">
+      <p>HP: ${game.playerShip.hull}</p>
+      </div>
       <hr>
+      <div>
       <p><strong>Alien Ships:</strong></p>
-      ${game.alienShips.map((ship, index) => `<p>${index + 1}. ${ship.name}: Hull - ${ship.hull}</p>`).join('')}
+      ${game.alienShips.map((ship, index) => `
+      <div class="alien-ships">
+      <p>${index + 1}. ${ship.name}: HP - ${ship.hull}</p>
+      <img src="./Images/ec2d7855-8987-4c16-a2b3-31823253abca.jpg" alt="Alien Ship"
+      style="width: 100px; height: 100px;">
+      </div>
+      `).join('')}
+      </div>
     `;
   }
 
