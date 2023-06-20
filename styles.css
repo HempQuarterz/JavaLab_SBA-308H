@@ -1,0 +1,83 @@
+/*body {
+    margin: 0;
+    padding: 0;
+    background: url(https://i.gifer.com/81mz.gif) center center fixed;
+    background-size: cover;
+  }
+  
+  #container {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.8); 
+  } 
+  */ 
+
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #battlefield {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .ship {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 100px;
+    background-color: lightgray;
+    margin: 0 10px;
+    font-weight: bold;
+  }
+
+  .ship img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .hull, .firepower, .accuracy {
+    margin: 5px;
+  }
+  
+  #text {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .btn {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  /* Additional styling for visual effects */
+  .ship {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+  }
+  
+  .ship:hover {
+    transform: scale(1.1);
+  }
+  
+  #player-ship {
+    background-color: lightblue;
+  }
+  
+  #alien-ship {
+    background-color: lightcoral;
+  }
+  

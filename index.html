@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Game</title>
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+    <h1>Save the Universe</h1>
+
+    <div class="container">
+        <div id="battlefield">
+
+            <div id="player-ship" class="ship">
+                <img src="./Images/png-transparent-sprite-spacecraft-pixel-art-spaceship-computer-graphics-spacecraft-design-shooter-game-thumbnail.png" alt="Player ship">
+
+                <span id="player-hull" class="hull"></span>
+                <span id="player-firepower" class="firepower"></span>
+                <span id="player-accuracy" class="accuracy"></span>
+            </div>
+            <div id="alien-ship" class="ship">
+                <span id="alien-hull" class="hull"></span>
+                <span id="alien-firepower" class="firepower"></span>
+                <span id="alien-accuracy" class="accuracy"></span>
+            </div>
+        </div>
+        <div id="text">Text</div>
+        <div id="option-buttons" class="btn-grid">
+            <button id="attackButton" class="btn">Attack</button>
+            <button id="retreatButton" class="btn">Retreat</button>
+        </div>
+    </div>
+
+
+    
+    <script src="./game.js"></script>
+</body>
+</html>
