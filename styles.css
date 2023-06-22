@@ -102,6 +102,17 @@ body {
     font-family: fantasy;
   }
 
+  .select-button {
+    color: purple;
+    cursor: pointer;
+    font-family: fantasy;
+  }
+
+  .select-button:hover {
+    background-color: purple;
+    color: whitesmoke;
+  }
+
   #retreatButton:hover {
     background-color: red;
     color: whitesmoke;

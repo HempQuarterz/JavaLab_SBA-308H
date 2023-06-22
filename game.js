@@ -40,11 +40,19 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  // Disable buttons
+  function disableButtons() {
+    document.getElementById("attackButton").disabled = true;
+    document.getElementById("retreatButton").disabled = true;
+  }
+
   // Game object
   const game = {
     playerShip: null,
     alienShips: [],
     selectedAlienShip: null,
+    canRetreat: false,
+    firstAlienShipDestroyed: false,
 
     start() {
       outputText("Let the Battle Begin!");
@@ -58,6 +66,7 @@
 
       updateShipStatus();
       this.updateText();
+      disableButtons();
     },
 
     updateText() {
@@ -89,7 +98,16 @@
         const index = this.alienShips.indexOf(this.selectedAlienShip)
         this.alienShips.splice(index, 1);
         this.selectedAlienShip = null;
-      } 
+
+      if (!this.firstAlienShipDestroyed) {
+        this.firstAlienShipDestroyed = true;
+      }
+      
+      if (this.alienShips.length < 6) {
+        document.getElementById("retreatButton").disabled = false;
+      }
+    } 
+
       
         // Alien ships attack if any are remaining
         if (this.alienShips.length > 0) {
@@ -106,6 +124,10 @@
         outputText(`Game over! ${this.playerShip.name} was destroyed.`);
         disableButtons();
         return; // End the game
+      }
+
+      if (this.selectAlienShip === null && this.alienShips.length < 6) {
+        document.getElementById("retreatButton").disabled = false;
       }
   
       this.checkWin();
@@ -140,6 +162,8 @@
     retreat() {
       disableButtons();
       outputText("You chose to retreat. Game over!");
+      game.canRetreat = false;
+      document.getElementById("retreatButton").disabled = true;
     },
   
     checkWin() {
@@ -149,9 +173,13 @@
       } else {
         this.updateText();
       }
+   
+      if (this.firstAlienShipDestroyed) {
+        game.canRetreat = true;
+        document.getElementById("retreatButton").disabled = false;
+      }
     }
-  };
-
+  }
 
   // Helper function to output text to the screen
   function outputText(text) {
@@ -164,14 +192,11 @@
   // Enable buttons
   function enableButtons() {
     document.getElementById("attackButton").disabled = false;
-    document.getElementById("retreatButton").disabled = false;
+    document.getElementById("retreatButton").disabled = !game.canRetreat;
   }
 
-  // Disable buttons
-  function disableButtons() {
-    document.getElementById("attackButton").disabled = true;
-    document.getElementById("retreatButton").disabled = true;
-  }
+
+  
 
   // Update ship status
   function updateShipStatus() {
