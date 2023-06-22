@@ -4,7 +4,21 @@ body {
     background: url(https://i.gifer.com/81mz.gif) center center fixed;
     background-size: cover;
     color: white;
-    font-size: 20px;  
+    font-size: 30px;  
+  }
+
+  p {
+
+    font-size: 25px;
+    font-family: fantasy;
+    color: white;
+    text-shadow: 5px 5px 15px green;
+  }   
+
+  h1 {
+    font-size: 50px;
+    font-family: fantasy;
+    text-shadow: 5px 5px 15px green;
   }
   
   #container {
@@ -13,9 +27,6 @@ body {
     background: rgba(255, 255, 255, 0.8); 
   } 
    
-
-
-
 
 .container {
     display: flex;
@@ -66,36 +77,38 @@ body {
     
   }
 
-  /* Additional styling for visual effects */
-  .ship {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
-  }
-  
-  .ship:hover {
-    transform: scale(1.1);
-  }
-  
-  #player-ship {
-    background-color: lightblue;
-  }
-  
-  #alien-ship {
-    background-color: lightcoral;
-  }
-  
-
-  .health-bar {
-    width: 100%;
-    height: 10px;
-    background-color: green;
-  }
-  
-  .ship.alien-ship .health-bar {
-    background-color: red;
-  }
-
   .alien-ships {
     display: inline-block;
     margin-right: 10px;
   }
+
+  #attackButton {
+    color: green;
+    cursor: pointer;
+    font-size: 25px;
+    font-family: fantasy;
+  }
+
+  #attackButton:hover {
+    background-color: green;
+    color: whitesmoke;
+
+  }
+
+  #retreatButton {
+    color: red;
+    cursor: pointer;
+    font-size: 25px;
+    font-family: fantasy;
+  }
+
+  #retreatButton:hover {
+    background-color: red;
+    color: whitesmoke;
+  }
+
+  #text {
+    font-family: fantasy;
+    text-shadow: 5px 5px 15px green;
+  }
+  

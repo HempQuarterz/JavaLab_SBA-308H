@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
 
   // Ship class
   class Ship {
@@ -45,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const game = {
     playerShip: null,
     alienShips: [],
+    selectedAlienShip: null,
 
     start() {
       outputText("Let the Battle Begin!");
@@ -61,24 +61,36 @@ document.addEventListener("DOMContentLoaded", function() {
     },
 
     updateText() {
-      outputText("What would you like to do?");
+      if (this.selectedAlienShip === null) {
+      outputText(`Select a ship to attack`);
+      } else {
+        outputText(`You have selected ${this.selectedAlienShip.name}.`);
+      }
+
       enableButtons();
     },
 
     attack() {
       disableButtons();
+
+      if (this.selectedAlienShip === null) {
+        outputText("Please select a ship to attack");
+        return;
+      }
   
-      const currentAlienShip = this.alienShips[0];
   
       // Player ship attacks the current alien ship
-      this.playerShip.attack(currentAlienShip);
+      this.playerShip.attack(this.selectedAlienShip);
   
       // Check if the current alien ship is destroyed
-      if (currentAlienShip.hull <= 0) {
-        outputText(`You destroyed ${currentAlienShip.name}!`);
+      if (this.selectedAlienShip.hull <= 0) {
+        outputText(`You destroyed ${this.selectedAlienShip.name}!`);
         // Remove the destroyed alien ship from the array
-        this.alienShips.splice(0, 1);
+        const index = this.alienShips.indexOf(this.selectedAlienShip)
+        this.alienShips.splice(index, 1);
+        this.selectedAlienShip = null;
       } 
+      
         // Alien ships attack if any are remaining
         if (this.alienShips.length > 0) {
           this.alienShipsAttack();
@@ -86,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
       
   
       // Update ship status
+      
       updateShipStatus();
   
       // Check if the player ship is destroyed
@@ -96,6 +109,12 @@ document.addEventListener("DOMContentLoaded", function() {
       }
   
       this.checkWin();
+    },
+
+    selectAlienShip(alienShip)  {
+      this.selectedAlienShip = alienShip;
+      updateShipStatus();
+      this.updateText();
     },
 
     alienShipsAttack() {
@@ -133,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
+
   // Helper function to output text to the screen
   function outputText(text) {
     window.alert(text);
@@ -158,23 +178,26 @@ document.addEventListener("DOMContentLoaded", function() {
     const shipStatusElement = document.getElementById("shipStatus");
     shipStatusElement.innerHTML = `
     <div>
-      <p><strong>${game.playerShip.name}</strong></p>
+      <p>${game.playerShip.name}</p>
       <img src="./Images/e2002de1-e791-4215-b354-cf1a9d92e9f2.jpg" alt="Player Ship" style="width: 100px; height: 100px;">
       <p>HP: ${game.playerShip.hull}</p>
       </div>
       <hr>
       <div>
-      <p><strong>Alien Ships:</strong></p>
+      <p>Alien Ships:</p>
       ${game.alienShips.map((ship, index) => `
       <div class="alien-ships">
       <p>${index + 1}. ${ship.name}: HP - ${ship.hull}</p>
       <img src="./Images/ec2d7855-8987-4c16-a2b3-31823253abca.jpg" alt="Alien Ship"
       style="width: 100px; height: 100px;">
+      <button class="select-button" onClick="selectAlienShip(${index})">Select</button>
       </div>
       `).join('')}
       </div>
     `;
   }
+
+
 
   // Button event listeners
   document.getElementById("attackButton").addEventListener("click", () => {
@@ -185,6 +208,13 @@ document.addEventListener("DOMContentLoaded", function() {
     game.retreat();
   });
 
+  function selectAlienShip(index) {
+    game.selectedAlienShip = game.alienShips[index];
+    updateShipStatus();
+    game.updateText();
+  }
+
   // Start the game
+  document.addEventListener("DOMContentLoaded", function() {
   game.start();
 });
