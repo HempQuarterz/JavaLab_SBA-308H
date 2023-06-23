@@ -43,8 +43,10 @@
   // Disable buttons
   function disableButtons() {
     document.getElementById("attackButton").disabled = true;
+    if (!game.canRetreat) {
     document.getElementById("retreatButton").disabled = true;
   }
+}
 
   // Game object
   const game = {
@@ -170,15 +172,22 @@
       if (this.alienShips.length <= 0) {
         outputText("Congratulations! You destroyed all the alien ships!");
         disableButtons();
+        document.getElementById("retreatButton").disabled = true
       } else {
         this.updateText();
       }
    
-      if (this.firstAlienShipDestroyed) {
+      if (this.firstAlienShipDestroyed && this.alienShips.length < 6) {
         game.canRetreat = true;
         document.getElementById("retreatButton").disabled = false;
-      }
+      } else {
+        game.canRetreat = false;
+        document.getElementById("retreatButton").disabled = true;
     }
+      if (this.alienShips.length === 0) {
+        document.getElementById("retreatButton").disabled = true;
+  }
+}
   }
 
   // Helper function to output text to the screen
