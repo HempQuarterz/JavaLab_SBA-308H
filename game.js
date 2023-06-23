@@ -123,7 +123,7 @@
   
       // Check if the player ship is destroyed
       if (this.playerShip.hull <= 0) {
-        outputText(`Game over! ${this.playerShip.name} was destroyed.`);
+        outputText(`Game over! ${this.playerShip.name} was destroyed. Refresh the page to try again.`);
         disableButtons();
         return; // End the game
       }
@@ -152,7 +152,7 @@
     
         // Check if the player ship is destroyed
         if (this.playerShip.hull <= 0) {
-          outputText(`Game over! ${this.playerShip.name} was destroyed.`);
+          outputText(`Game over! ${this.playerShip.name} was destroyed. Refresh the page to try again.`);
           disableButtons();
           return; // End the game
         }
@@ -163,14 +163,14 @@
   
     retreat() {
       disableButtons();
-      outputText("You chose to retreat. Game over!");
+      outputText("You chose to retreat. Game over! Refresh the page to try again.");
       game.canRetreat = false;
       document.getElementById("retreatButton").disabled = true;
     },
   
     checkWin() {
       if (this.alienShips.length <= 0) {
-        outputText("Congratulations! You destroyed all the alien ships!");
+        outputText("Congratulations! You destroyed all the alien ships! Refresh the page to play again.");
         disableButtons();
         document.getElementById("retreatButton").disabled = true
       } else {
@@ -221,7 +221,7 @@
       <p>Alien Ships:</p>
       ${game.alienShips.map((ship, index) => `
       <div class="alien-ships">
-      <p>${index + 1}. ${ship.name}: HP - ${ship.hull}</p>
+      <p>${index + 1}. ${ship.name}: HP: ${ship.hull}</p>
       <img src="./Images/ec2d7855-8987-4c16-a2b3-31823253abca.jpg" alt="Alien Ship"
       style="width: 100px; height: 100px;">
       <button class="select-button" onClick="selectAlienShip(${index})">Select</button>
