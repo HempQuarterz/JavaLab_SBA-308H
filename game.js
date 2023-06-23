@@ -125,6 +125,7 @@
       if (this.playerShip.hull <= 0) {
         outputText(`Game over! ${this.playerShip.name} was destroyed. Refresh the page to try again.`);
         disableButtons();
+        document.getElementById("retreatButton").disabled = true;
         return; // End the game
       }
 
